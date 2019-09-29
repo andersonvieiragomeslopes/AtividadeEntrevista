@@ -1,5 +1,7 @@
-﻿
-<form id="formCadastro" method="post">
+﻿@*<form id="formCadastro" method="post">*@
+@using (Html.BeginForm("Incluir", "Cliente", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -81,9 +83,6 @@
         </div>
     </div>
 
-
-</form>
-
     <script type="text/javascript">
         var cnpj_id = 0;
         $(document).ready(function () {
@@ -113,7 +112,7 @@
                     if (validacep.test(cep)) {
 
                         //Preenche os campos com "..." enquanto consulta webservice.
-                        $("#txtEndereco").val("");
+                        $("#Logradouro").val("");
                         $("#txtBairro").val("");
                         $("#txtCid").val("");
                         $("#txtEstado").val("");
@@ -122,7 +121,7 @@
 
                             if (!("erro" in dados)) {
                                 //Atualiza os campos com os valores da consulta.
-                                $("#txtEndereco").val(dados.logradouro);
+                                $("#Logradouro").val(dados.logradouro);
                                 $("#txtBairro").val(dados.bairro);
                                 $("#txtCid").val(dados.localidade);
                                 $("#txtEstado").val(dados.uf);
@@ -150,53 +149,55 @@
                 }
             });
         });
-        var options = {
-            onKeyPress: function (cpf, ev, el, op) {
-                var masks = ['000.000.000-000', '00.000.000/0000-00'];
-                $('.cpfOuCnpj').mask((cpf.length > 14) ? masks[1] : masks[0], op);
-                var cnpj = $('.cpfOuCnpj').val().replace(/[^0-9]/g, '');
-                if (cnpj.length == 14) {
-                    cnpj_id = cnpj;
-                    load_cnpj();
-                }
-            }
-        }
-        $('.cpfOuCnpj').length > 11 ? $('.cpfOuCnpj').mask('00.000.000/0000-00', options) : $('.cpfOuCnpj').mask('000.000.000-00#', options);
+        //var options = {
+        //    onKeyPress: function (cpf, ev, el, op) {
+        //        var masks = ['000.000.000-000', '00.000.000/0000-00'];
+        //        $('.cpfOuCnpj').mask((cpf.length > 14) ? masks[1] : masks[0], op);
+        //        var cnpj = $('.cpfOuCnpj').val().replace(/[^0-9]/g, '');
+        //        if (cnpj.length == 14) {
+        //            cnpj_id = cnpj;
+        //            load_cnpj();
+        //        }
+        //    }
+        //}
+        //$('.cpfOuCnpj').length > 11 ? $('.cpfOuCnpj').mask('00.000.000/0000-00', options) : $('.cpfOuCnpj').mask('000.000.000-00#', options);
 
         $(document).ready(function () {
             $("#cep").mask("99.999-999");
         });
-        //function load_cnpj() {
-        //    $.ajax({
-        //        url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj_id,
-        //        method: 'GET',
-        //        dataType: 'jsonp', // Em requisições AJAX para outro domínio é necessário usar o formato "jsonp" que é o único aceito pelos navegadores por questão de segurança
-        //        complete: function (xhr) {
+                //function load_cnpj() {
+                //    $.ajax({
+                //        url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj_id,
+                //        method: 'GET',
+                //        dataType: 'jsonp', // Em requisições AJAX para outro domínio é necessário usar o formato "jsonp" que é o único aceito pelos navegadores por questão de segurança
+                //        complete: function (xhr) {
 
-        //            // Aqui recuperamos o json retornado
-        //            response = xhr.responseJSON;
+                //            // Aqui recuperamos o json retornado
+                //            response = xhr.responseJSON;
 
-        //            // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
-        //            if (response.status == 'OK') {
+                //            // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
+                //            if (response.status == 'OK') {
 
-        //                // Agora preenchemos os campos com os valores retornados
-        //                $('#Empresa_RazaoSocial').val(response.nome);
-        //                $('#Empresa_Complemento').val(response.complemento);
-        //                $('#txtEndereco').val(response.logradouro);
-        //                $('#Empresa_Telefone').val(response.telefone);
-        //                $('#Empresa_Email').val(response.email);
-        //                $('#Empresa_Numero').val(response.numero);
-        //                $('#txtEstado').val(response.uf);
-        //                $('#Empresa_Cep').val(response.cep.replace(/\.|\-/g, ''));
-        //                $('#txtBairro').val(response.bairro);
-        //                $('#txtCid').val(response.municipio);
+                //                // Agora preenchemos os campos com os valores retornados
+                //                $('#Empresa_RazaoSocial').val(response.nome);
+                //                $('#Empresa_Complemento').val(response.complemento);
+                //                $('#Logradouro').val(response.logradouro);
+                //                $('#Empresa_Telefone').val(response.telefone);
+                //                $('#Empresa_Email').val(response.email);
+                //                $('#Empresa_Numero').val(response.numero);
+                //                $('#txtEstado').val(response.uf);
+                //                $('#Empresa_Cep').val(response.cep.replace(/\.|\-/g, ''));
+                //                $('#txtBairro').val(response.bairro);
+                //                $('#txtCid').val(response.municipio);
 
 
-        //                // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
-        //            } else {
-        //                swal("Erro!", "CNPJ inválido ou rejeitado pela Receita Federal.", "error");
-        //            }
-        //        }
-        //    });
-        //}
+                //                // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
+                //            } else {
+                //                swal("Erro!", "CNPJ inválido ou rejeitado pela Receita Federal.", "error");
+                //            }
+                //        }
+                //    });
+                //}
     </script>
+}
+

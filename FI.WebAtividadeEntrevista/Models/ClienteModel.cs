@@ -66,6 +66,9 @@ namespace WebAtividadeEntrevista.Models
         /// Telefone
         /// </summary>
         public string Telefone { get; set; }
+        [Required]
+        [RegularExpression(@"[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}", ErrorMessage = "Erro, CPF inválido!")]
+        public string CPF { get; set; }
 
     }    
 }
