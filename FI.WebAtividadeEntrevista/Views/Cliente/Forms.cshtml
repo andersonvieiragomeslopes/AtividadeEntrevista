@@ -73,7 +73,11 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-4">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#CadBeneficiario">Beneficiários</button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="pull-right">
@@ -83,7 +87,52 @@
         </div>
     </div>
 
+
+    <div id="CadBeneficiario" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastro dos Beneficiários</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="CPF">CPF:</label>
+                                <input type="text" class="form-control cpf-mask" id="CPFB" name="CPFB" placeholder="Digite o cpf" maxlength="14">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="Nome">Nome:</label>
+                                <input type="text" class="form-control" id="NomeBenef" name="NomeBenef" placeholder="Ex.: João" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" onclick="InsertNewRow ();" class="btn btn-success">Incluir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            $(".cpf-mask").mask("999.999.999-99");
+        });
         var cnpj_id = 0;
         $(document).ready(function () {
 
@@ -165,39 +214,39 @@
         $(document).ready(function () {
             $("#cep").mask("99.999-999");
         });
-                //function load_cnpj() {
-                //    $.ajax({
-                //        url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj_id,
-                //        method: 'GET',
-                //        dataType: 'jsonp', // Em requisições AJAX para outro domínio é necessário usar o formato "jsonp" que é o único aceito pelos navegadores por questão de segurança
-                //        complete: function (xhr) {
+                            //function load_cnpj() {
+                            //    $.ajax({
+                            //        url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj_id,
+                            //        method: 'GET',
+                            //        dataType: 'jsonp', // Em requisições AJAX para outro domínio é necessário usar o formato "jsonp" que é o único aceito pelos navegadores por questão de segurança
+                            //        complete: function (xhr) {
 
-                //            // Aqui recuperamos o json retornado
-                //            response = xhr.responseJSON;
+                            //            // Aqui recuperamos o json retornado
+                            //            response = xhr.responseJSON;
 
-                //            // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
-                //            if (response.status == 'OK') {
+                            //            // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
+                            //            if (response.status == 'OK') {
 
-                //                // Agora preenchemos os campos com os valores retornados
-                //                $('#Empresa_RazaoSocial').val(response.nome);
-                //                $('#Empresa_Complemento').val(response.complemento);
-                //                $('#Logradouro').val(response.logradouro);
-                //                $('#Empresa_Telefone').val(response.telefone);
-                //                $('#Empresa_Email').val(response.email);
-                //                $('#Empresa_Numero').val(response.numero);
-                //                $('#txtEstado').val(response.uf);
-                //                $('#Empresa_Cep').val(response.cep.replace(/\.|\-/g, ''));
-                //                $('#txtBairro').val(response.bairro);
-                //                $('#txtCid').val(response.municipio);
+                            //                // Agora preenchemos os campos com os valores retornados
+                            //                $('#Empresa_RazaoSocial').val(response.nome);
+                            //                $('#Empresa_Complemento').val(response.complemento);
+                            //                $('#Logradouro').val(response.logradouro);
+                            //                $('#Empresa_Telefone').val(response.telefone);
+                            //                $('#Empresa_Email').val(response.email);
+                            //                $('#Empresa_Numero').val(response.numero);
+                            //                $('#txtEstado').val(response.uf);
+                            //                $('#Empresa_Cep').val(response.cep.replace(/\.|\-/g, ''));
+                            //                $('#txtBairro').val(response.bairro);
+                            //                $('#txtCid').val(response.municipio);
 
 
-                //                // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
-                //            } else {
-                //                swal("Erro!", "CNPJ inválido ou rejeitado pela Receita Federal.", "error");
-                //            }
-                //        }
-                //    });
-                //}
+                            //                // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
+                            //            } else {
+                            //                swal("Erro!", "CNPJ inválido ou rejeitado pela Receita Federal.", "error");
+                            //            }
+                            //        }
+                            //    });
+                            //}
     </script>
 }
 
